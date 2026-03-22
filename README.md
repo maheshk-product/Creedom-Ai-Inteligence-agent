@@ -29,18 +29,62 @@ Creedom Intelligence is designed to serve solo creators, educators, and social c
 - **50–69 (MEDIUM)**: Add to watchlist - act within 2 weeks
 - **Below 50 (NOISE)**: Ignore
 
-## Installation
+## 🚀 Quick Start for Beginners
+
+**New to coding?** No problem! We've got you covered.
+
+### Option 1: Automated Setup (Recommended)
+
+**Windows:**
+```bash
+install.bat
+```
+
+**Mac/Linux:**
+```bash
+./install.sh
+```
+
+The script will:
+- ✅ Check Python installation
+- ✅ Install all required libraries (free)
+- ✅ Create configuration template
+- ✅ Guide you through setup
+
+### Option 2: Manual Setup
 
 ```bash
-# Clone the repository
+# 1. Clone the repository
 git clone https://github.com/maheshk-product/Creedom-Ai-Inteligence-agent.git
 cd Creedom-Ai-Inteligence-agent
 
-# Install dependencies
+# 2. Install dependencies (all FREE)
 pip install -r requirements.txt
+
+# 3. Set up configuration
+cp config_template.py config.py
+# Edit config.py with your credentials (see SETUP_GUIDE.md)
+
+# 4. Run the agent
+python run_agent.py
 ```
 
-## Quick Start
+### 📖 Complete Beginner's Guide
+
+**Never coded before?** Start here:
+- **[SETUP_GUIDE.md](SETUP_GUIDE.md)** - Step-by-step instructions for complete beginners (written for 8th graders!)
+- **[GITHUB_ACTIONS_GUIDE.md](GITHUB_ACTIONS_GUIDE.md)** - Run the agent in the cloud 24/7 for FREE
+
+### 💰 Cost: $0.00
+
+Everything you need is FREE:
+- ✅ Reddit API - Free (60 requests/min)
+- ✅ Email notifications - Free Gmail SMTP (500/day)
+- ✅ Database - Free SQLite (built-in)
+- ✅ Cloud hosting - Free GitHub Actions (2,000 min/month)
+- ✅ Python & libraries - Free & open source
+
+## Quick Start (For Developers)
 
 ```python
 from creedom_agent import CreedomAgent, TrendData, CreatorProfile

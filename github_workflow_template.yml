@@ -1,0 +1,120 @@
+name: Run Creedom AI Agent
+
+# Schedule: Run every 6 hours (customize this!)
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch:  # Allows manual trigger from Actions tab
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest  # FREE Ubuntu environment
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'  # FREE Python 3.9
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install praw requests python-dateutil
+
+    - name: Create config from secrets
+      env:
+        REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+        REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+        REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+        REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
+        EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+        EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+      run: |
+        cat > config.py << 'EOF'
+        # Auto-generated config from GitHub Secrets
+
+        # Reddit API Configuration
+        REDDIT_CLIENT_ID = "${{ secrets.REDDIT_CLIENT_ID }}"
+        REDDIT_CLIENT_SECRET = "${{ secrets.REDDIT_CLIENT_SECRET }}"
+        REDDIT_USER_AGENT = "Creedom Agent by /u/${{ secrets.REDDIT_USERNAME }}"
+        REDDIT_USERNAME = "${{ secrets.REDDIT_USERNAME }}"
+        REDDIT_PASSWORD = "${{ secrets.REDDIT_PASSWORD }}"
+
+        # Email Configuration
+        EMAIL_ENABLED = True
+        EMAIL_FROM = "${{ secrets.EMAIL_FROM }}"
+        EMAIL_TO = "${{ secrets.EMAIL_TO }}"
+        EMAIL_PASSWORD = "${{ secrets.EMAIL_PASSWORD }}"
+        EMAIL_SMTP_HOST = "smtp.gmail.com"
+        EMAIL_SMTP_PORT = 587
+
+        # Database Configuration
+        DATABASE_TYPE = "sqlite"
+        DATABASE_PATH = "creedom_data.db"
+
+        # CUSTOMIZE THESE FOR YOUR NICHE:
+        CREATOR_ID = "github_actions_creator"
+        CREATOR_NAME = "Your Name"  # Change this!
+        CREATOR_NICHE = "fitness health wellness"  # Change this!
+        CREATOR_PLATFORM = "instagram"  # Change this!
+        CREATOR_STYLE = "educational reels"
+        CREATOR_FOLLOWER_COUNT = 10000
+        CREATOR_AUDIENCE_AGE = "25-35"
+
+        # Subreddits to scan (customize!)
+        SUBREDDITS_TO_SCAN = [
+            "fitness",
+            "health",
+            "wellness",
+            "nutrition",
+            "exercise"
+        ]
+
+        # Scanning settings
+        POSTS_PER_SUBREDDIT = 50
+        MIN_TSS_SCORE = 50
+
+        # Notification settings
+        NOTIFY_ON_CRITICAL = True
+        NOTIFY_ON_HIGH = True
+        NOTIFY_ON_MEDIUM = False
+
+        # Advanced settings
+        NUDGE_COOLDOWN_DAYS = 3
+        SCAN_INTERVAL_HOURS = 6
+        DEBUG_MODE = False
+        MAX_TRENDS_PER_RUN = 5
+
+        def validate_config():
+            """Validation for GitHub Actions."""
+            return True
+        EOF
+
+    - name: Download previous database (if exists)
+      uses: actions/download-artifact@v3
+      with:
+        name: creedom-database
+      continue-on-error: true
+
+    - name: Run Creedom Agent
+      run: |
+        echo "🤖 Starting Creedom AI Agent..."
+        python run_agent.py
+
+    - name: Upload database for next run
+      uses: actions/upload-artifact@v3
+      with:
+        name: creedom-database
+        path: creedom_data.db
+        retention-days: 30
+      continue-on-error: true
+
+    - name: Show statistics
+      run: |
+        echo "📊 Agent Statistics:"
+        python run_agent.py --stats
+      continue-on-error: true

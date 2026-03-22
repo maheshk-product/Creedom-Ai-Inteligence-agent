@@ -35,3 +35,10 @@ htmlcov/
 config.json
 *.db
 *.sqlite
+
+# IMPORTANT: Never commit config.py - it contains your passwords!
+config.py
+
+# Database files
+creedom_data.db
+*.sqlite3
