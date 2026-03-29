@@ -103,33 +103,80 @@ Now let's download the Creedom AI Agent to your computer.
 
 The agent needs to read Reddit posts. Reddit provides this for FREE!
 
-### 3.1 Create a Reddit App
+### 3.1 Accept Reddit's API Policy (NEW REQUIREMENT)
+
+**Reddit now requires you to acknowledge their API policy before creating apps.**
 
 1. **Log in to Reddit** at [reddit.com](https://reddit.com)
 
-2. **Go to App Preferences:**
+2. **Read the API Policy:**
+   - Go to: [Reddit's Responsible Builder Policy](https://support.reddithelp.com/hc/en-us/articles/42728983564564-Responsible-Builder-Policy)
+   - Read through the policy (takes 2-3 minutes)
+   - This explains how you can use Reddit's API responsibly
+
+3. **Verify Your Email:**
+   - Make sure your Reddit account has a verified email
+   - Check your email inbox for Reddit verification link if needed
+   - This is required for API access
+
+### 3.2 Create a Reddit App
+
+1. **Go to App Preferences:**
    - Visit: [reddit.com/prefs/apps](https://reddit.com/prefs/apps)
    - Scroll to the bottom
+   - You should see "are you a developer? create an app..." link
 
-3. **Create an app:**
-   - Click "create another app..." button
-   - Fill in the form:
-     - **name:** `Creedom Agent` (or anything you like)
-     - **App type:** Select "script"
-     - **description:** Leave blank (optional)
-     - **about url:** Leave blank (optional)
-     - **redirect uri:** Type `http://localhost:8080`
-   - Click "create app"
+2. **Click "create another app..." button**
+   - If you see a policy message, make sure you've completed Step 3.1 above
+   - If your account is brand new, you may need to wait 24 hours
 
-4. **Save your credentials:**
+3. **Fill in the form with these EXACT details:**
+
+   **Required Fields:**
+   - **name:** `Creedom Agent` (or anything you like)
+   - **App type:** Select **"script"** (⚫ script) - This is important!
+   - **description:** `Personal trend detection agent` (optional but recommended)
+   - **about url:** `https://github.com/maheshk-product/Creedom-Ai-Inteligence-agent` (optional)
+   - **redirect uri:** `http://localhost:8080` (REQUIRED - exactly as shown)
+
+   **Important Notes:**
+   - The **redirect uri** MUST be filled in (Reddit requires it now)
+   - Select **"script"** type (NOT "web app" or "installed app")
+   - Description and about URL are optional but help if you need Reddit support later
+
+4. **Click "create app"**
+   - If you get an error, double-check:
+     - You selected "script" type
+     - redirect uri is exactly: `http://localhost:8080`
+     - Your account email is verified
+
+5. **Save your credentials:**
    - You'll see a box with your new app
    - Under the app name, you'll see a random string (like `abc123xyz`) - this is your **CLIENT_ID**
    - Next to "secret", you'll see another string - this is your **CLIENT_SECRET**
    - **WRITE THESE DOWN!** You'll need them in Step 5.
 
-### 3.2 What You Should Have:
+### 3.3 Troubleshooting Reddit App Creation
+
+**"You need to read our API policy" message:**
+- Solution: Read the policy at the link provided, then come back
+- Make sure your email is verified
+- Try refreshing the page after reading the policy
+
+**Button doesn't work:**
+- Try disabling ad blockers (uBlock Origin, etc.)
+- Use Chrome or Firefox in normal mode (not incognito)
+- Clear your browser cache and cookies
+
+**"Account too new" error:**
+- Wait 24-48 hours after creating your Reddit account
+- Post 1-2 comments on Reddit to establish the account
+- Make sure email is verified
+
+### 3.4 What You Should Have:
 - ✅ Reddit username
 - ✅ Reddit password
+- ✅ Verified email on Reddit account
 - ✅ Client ID (looks like: `abc123xyz`)
 - ✅ Client Secret (looks like: `AbCdEf123456789`)
 

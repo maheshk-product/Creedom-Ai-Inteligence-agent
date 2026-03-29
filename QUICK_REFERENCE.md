@@ -29,15 +29,26 @@ This installs everything automatically!
 
 ### Step 3: Get Reddit API Keys
 
+**NEW: Reddit now requires policy acknowledgment first!**
+
 1. Go to reddit.com/prefs/apps
-2. Click "create another app..."
-3. Name: "Creedom Agent"
-4. Type: Select "script"
-5. Redirect URI: `http://localhost:8080`
+2. **First time?** Read Reddit's API policy:
+   - Visit: https://support.reddithelp.com/hc/en-us/articles/42728983564564-Responsible-Builder-Policy
+   - This is required before creating apps
+3. Verify your Reddit email if not already done
+4. Click "create another app..."
+5. Fill in:
+   - Name: "Creedom Agent"
+   - Type: Select **"script"** (⚫ script)
+   - Description: "Personal trend detection agent"
+   - About URL: (leave blank or use GitHub URL)
+   - Redirect URI: `http://localhost:8080` (REQUIRED!)
 6. Click "create app"
 7. **Write down**:
    - The string under the app name = **CLIENT_ID**
    - The string next to "secret" = **CLIENT_SECRET**
+
+**Important:** The redirect URI field is now REQUIRED by Reddit. Use exactly: `http://localhost:8080`
 
 ### Step 4: Get Gmail App Password
 
