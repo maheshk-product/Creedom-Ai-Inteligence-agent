@@ -33,6 +33,37 @@ Creedom Intelligence is designed to serve solo creators, educators, and social c
 
 **New to coding?** No problem! We've got you covered.
 
+### 🆕 Super Simple Mode (NO Reddit API Setup Required!)
+
+**Want to try this RIGHT NOW without ANY setup?** Use Simple Mode!
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/maheshk-product/Creedom-Ai-Inteligence-agent.git
+cd Creedom-Ai-Inteligence-agent
+
+# 2. Install dependencies (all FREE)
+pip install -r requirements.txt
+
+# 3. Set up simple configuration (NO Reddit API needed!)
+cp config_simple_template.py config_simple.py
+# Edit config_simple.py - only needs your email settings!
+
+# 4. Run the simple agent
+python run_agent_simple.py
+```
+
+**Simple Mode Features:**
+- ✅ No Reddit API credentials needed
+- ✅ Uses public Reddit JSON feeds
+- ✅ All features work the same (TSS scoring, email alerts, etc.)
+- ⚠️ Slightly slower and subject to stricter rate limits
+- ⚠️ Can only access public subreddits
+
+**Perfect for:** Testing the agent, learning how it works, or if you don't want to set up Reddit API credentials.
+
+---
+
 ### Option 1: Automated Setup (Recommended)
 
 **Windows:**
@@ -237,10 +268,11 @@ A creator should open your nudge, read it in 30 seconds, and immediately know ex
 
 ## Roadmap
 
-- [ ] Reddit API integration with PRAW
-- [ ] Database backend for creator profiles and signals
+- [x] Reddit API integration with PRAW
+- [x] Public JSON Reddit scanner (no auth alternative)
+- [x] Database backend for creator profiles and signals
+- [x] Email service integration (Gmail SMTP)
 - [ ] WhatsApp Business API integration
-- [ ] Email service integration (SendGrid/AWS SES)
 - [ ] Cross-subreddit trend detection
 - [ ] Machine learning for improved niche matching
 - [ ] Dashboard for trend monitoring
@@ -251,12 +283,44 @@ A creator should open your nudge, read it in 30 seconds, and immediately know ex
 
 The agent follows a modular design:
 
-1. **Scanner Module**: Fetches data from Reddit
+1. **Scanner Module**: Fetches data from Reddit (two modes available)
 2. **Scoring Engine**: Calculates TSS scores
 3. **Matching Engine**: Maps trends to creators
 4. **Brief Generator**: Creates actionable content
 5. **Nudge System**: Handles notifications with cooldown
 6. **Intelligence DB**: Logs signals for learning
+
+### Two Scanning Modes
+
+#### Full Mode (`run_agent.py`)
+- Uses Reddit API (PRAW) with authentication
+- Requires Reddit API credentials (free but needs setup)
+- Faster and more reliable
+- 60 requests per minute
+- **Best for:** Regular use, production deployments
+
+**Files:**
+- `run_agent.py` - Main runner with full Reddit API
+- `config_template.py` → `config.py` - Full configuration
+
+#### Simple Mode (`run_agent_simple.py`)
+- Uses Reddit's public JSON feeds (no auth)
+- No Reddit API credentials needed
+- Slightly slower, stricter rate limits
+- Can only access public subreddits
+- **Best for:** Testing, learning, quick setup
+
+**Files:**
+- `run_agent_simple.py` - Simple runner without authentication
+- `reddit_scanner_simple.py` - Public JSON scanner
+- `config_simple_template.py` → `config_simple.py` - Simplified configuration
+
+Both modes provide:
+- ✅ TSS scoring
+- ✅ Creator matching
+- ✅ Content brief generation
+- ✅ Email notifications
+- ✅ SQLite database logging
 
 ## Contributing
 
