@@ -62,6 +62,8 @@ python run_agent_simple.py
 
 **Perfect for:** Testing the agent, learning how it works, or if you don't want to set up Reddit API credentials.
 
+**📖 Not sure which mode to use?** See [CHOOSING_MODE.md](CHOOSING_MODE.md) for a detailed comparison.
+
 ---
 
 ### Option 1: Automated Setup (Recommended)
